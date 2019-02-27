@@ -8,6 +8,7 @@ public class ArbolMain {
 			Fuente hf = new Fuente();
 			hf.frecuencia();
 			hf.probabilidad();
+			hf.arbolHuffman();
 			
 	}
 
