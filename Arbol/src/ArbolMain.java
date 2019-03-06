@@ -9,6 +9,8 @@ public class ArbolMain {
 			hf.frecuencia();
 			hf.probabilidad();
 			hf.arbolHuffman();
+			//hf.entropia();
+			
 			
 	}
 

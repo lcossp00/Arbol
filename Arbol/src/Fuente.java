@@ -1,7 +1,4 @@
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -19,13 +16,19 @@ public class Fuente
 	ArrayList<String> posicion = new ArrayList<String>();
 	ArrayList<Double> copiaProb = new ArrayList<Double>();
 	ArrayList<String> pos = new ArrayList<String>();
+	
+	//parte Tres
+	String[] stringFre;
+	ArrayList<Double> pi = new ArrayList<Double>();
+
+
 
 
 	
 	public Fuente()
 	{
 	 //Contructor
-		cadena = "La noche cae, brumosa ya y morada. Vagas claridades malvas y verdes perduran tras la torre de la iglesia. El camino sube, lleno de sombras, de campanillas, de fragancia de hierba, de canciones, de cansancio y de anhelo.\r\n";
+		cadena ="Hola"; //"La noche cae, brumosa ya y morada. Vagas claridades malvas y verdes perduran tras la torre de la iglesia. El camino sube, lleno de sombras, de campanillas, de fragancia de hierba, de canciones, de cansancio y de anhelo.\r\n";
 
 		
 	}
@@ -89,60 +92,7 @@ public class Fuente
 		
 		System.out.println(probabilidad);
 	}
-	public void arbolHuffman()
-	{
-		copiaProb = probabilidad;
-		double numero1 = 0;
-		double numero2 = 0;
-		double numeroSuma = 0;
-		int cont = probabilidad.size() - 1;
-		System.out.println(probabilidad.size());
-		for(int i= 0 ;i <cont;i++)
-		{
-			pos.add(""+i);
-		}
-
-		for(int i= 0 ;i <cont;i++)
-		{
-			int index = 0;
-			for(Double n: copiaProb)
-			{
-				if(copiaProb.get(index) <= n)
-				{
-					numero1 = copiaProb.get(index);
-					
-				}
-				index++;
-					
-			}
-			copiaProb.remove(index - 1);
-			
-			int index2 = 0;
-			for(Double n: copiaProb)
-			{
-				if(copiaProb.get(index2) <= n)
-				{
-					numero2 = copiaProb.get(index2);
-					
-				}
-				index2++;
-					
-			}
-			copiaProb.remove(index2-1);
-			
-			posicion.add("" + pos.get(index) + pos.get(index2));
-			pos.remove(index-1);
-			pos.remove(index2);
-			
-			System.out.println(posicion);
-			numeroSuma = numero1 + numero2;
-			copiaProb.add(numeroSuma);
-			
-		
-		}
-		
-		System.out.println(copiaProb);
-	}
+	
 	/*public void arbolHuffman()
 	{
 		copiaProb = probabilidad;
@@ -151,7 +101,15 @@ public class Fuente
 		double numeroSuma = 0;
 		int cont = probabilidad.size() - 1;
 		System.out.println(probabilidad.size());
-
+		
+		for(int i= 0 ;i <=cont;i++)
+		{
+			pos.add(""+i);
+		}
+		
+		System.out.println(pos);
+		System.out.println(probabilidad.size());
+		
 		for(int i= 0 ;i <cont;i++)
 		{
 			int index = 0;
@@ -180,15 +138,87 @@ public class Fuente
 			}
 			copiaProb.remove(index2-1);
 			
-			posicion.add("" + index + index2);
+			posicion.add("" + pos.get(index-1) + pos.get(index2-1));
 			System.out.println(posicion);
+			pos.remove(index-1);
+			pos.remove(index2-2);
+			
+			//System.out.println(posicion);
 			numeroSuma = numero1 + numero2;
 			copiaProb.add(numeroSuma);
 			
 		
 		}
 		
-		System.out.println(copiaProb);
+		//System.out.println(copiaProb);
 	}*/
+	
+	public void arbolHuffman()
+	{
+		
+	}
+	
+	public int sumaFrecuencia()
+	{
+
+		int t = 0;
+		
+		for(int i = 0;i < stringFre.length;i++)
+		{
+			t = t + Integer.parseInt(stringFre[i]);
+		}
+		
+		return t;
+	}
+	
+	public double sumaFrecLog()
+	{
+		double sumaResultado = 0.0;
+		
+		for(int i = 0;i < stringFre.length;i++)
+		{
+			sumaResultado = sumaResultado + (Double.parseDouble(stringFre[i]) * log(Double.parseDouble(stringFre[i]),2));
+		
+		}
+		
+		return sumaResultado;
+		
+	}
+	
+	public void entropia()
+	{
+		double resultadoFinal;
+		String stringFrecuencia = "83,69,67,82,69,84,79,32,68,69,32,85,78,79,32,83,69,67,82,69,84,79,32,83,69,71,85,82,79";
+		
+		stringFre = stringFrecuencia.split(",");
+		
+		int t = sumaFrecuencia();
+		double logaritmo = log(t,2);
+		double division = 1.0/Double.valueOf(t);
+		resultadoFinal = logaritmo - (division * sumaFrecLog());
+		
+		System.out.println(resultadoFinal);
+		
+		
+	}
+	
+	private void eficacia()
+	{
+		int t = sumaFrecuencia();
+		for(int i = 0;i < stringFre.length;i++)
+		{
+			 pi.add(Double.parseDouble(stringFre[i])/t);
+			 
+		}
+	}
+	
+	private static Double log(double num, int base) 
+	{
+	     return (Math.log10(num) / Math.log10(base));
+	}
+	
+
+	
+
 	
 }
